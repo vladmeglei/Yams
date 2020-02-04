@@ -9,6 +9,7 @@ import (
 var (
 	noOfPlayers int
 	name        string
+	reader      = bufio.NewReader(os.Stdin)
 )
 
 type Table struct {
@@ -29,18 +30,10 @@ type Table struct {
 	Yams   int
 }
 
-// sss
-func CreatePlayerTable(playerName string) string {
-	var playerTable string
-	playerTable = playerName
-	return playerTable
-}
-
 func GetPlayerNames() []string {
 
 	var players []string
 
-	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("How many players are in the game?")
 	fmt.Println("Players:")
 
@@ -57,54 +50,4 @@ func GetPlayerNames() []string {
 
 	}
 	return players
-}
-
-func AddScoreToTable(category string, score int, table Table) {
-
-	switch category {
-	case "One":
-		table.One = score
-		fmt.Println("Added score ", score, " to category One")
-	case "Two":
-		table.Two = score
-		fmt.Println("Added score ", score, " to category Two")
-	case "Three":
-		table.Three = score
-		fmt.Println("Added score ", score, " to category Three")
-	case "Four":
-		table.Four = score
-		fmt.Println("Added score ", score, " to category Four")
-	case "Five":
-		table.Five = score
-		fmt.Println("Added score ", score, " to category Five")
-	case "Six":
-		table.Six = score
-		fmt.Println("Added score ", score, " to category Six")
-	case "OneP":
-		table.OneP = score + 10
-		fmt.Println("Added score ", score, " to category One Pair")
-	case "TwoP":
-		table.TwoP = score + 20
-		fmt.Println("Added score ", score, " to category Two Pairs")
-	case "ThreeK":
-		table.ThreeK = score + 30
-		fmt.Println("Added score ", score, " to category Three of a Kind")
-	case "SmallF":
-		table.SmallF = score
-		fmt.Println("Added score ", score, " to category Small Flush")
-	case "BigF", "Bigflush", "Big flush":
-		table.BigF = score
-		fmt.Println("Added score ", score, " to category Big Flush")
-	case "FullH":
-		table.FullH = score + 40
-		fmt.Println("Added score ", score, " to category FullHouse")
-	case "FourK", "Fourofakind", "Four of a kind":
-		table.FourK = score + 50
-		fmt.Println("Added score ", score, " to category Four of a Kind")
-	case "Yams":
-		table.Yams = score + 60
-		fmt.Println("Added score ", score, " to category Yams")
-
-	}
-
 }
