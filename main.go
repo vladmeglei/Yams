@@ -1,11 +1,5 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-)
-
 // When the game starts it prompts for how many players. Then it needs the name for the players to initialize the tables.
 // It prints the valid combinations and then starts the first round of the game.
 // Each player takes turns to roll the dice and have 2 chances to reroll if they want (any number of dices).
@@ -25,33 +19,26 @@ import (
 //Two pairs
 //One pair
 
+var (
+	playerNames []string
+)
+
 func main() {
 
-	var noOfPlayers int
-	var playerNames []string
-	var name string
+	//Create players
 
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Println("How many players are in the game?")
-	fmt.Println("Players:")
+	//Create tables
 
-	if _, err := fmt.Scan(&noOfPlayers); err != nil {
-		fmt.Println("Please introduce a valid number of players")
-	} else {
+	//Start game
+	//  For - number of turns
+	//		Each player take turn and rolls dice
+	//			Reroll 2 times if necessary
+	// 				Add score to table
 
-		fmt.Println("Number of players is set to: ", noOfPlayers)
-	}
+	playerNames = GetPlayerNames()
 
-	for i := 0; i < noOfPlayers; i++ {
-		player, _ := reader.ReadString('\n')
-		playerNames = append(playerNames, player)
+	for i := 0; i < 28; i++ {
 
 	}
-
-	for _, v := range playerNames {
-		name = CreatePlayerTable(v)
-	}
-
-	fmt.Println(name)
 
 }
