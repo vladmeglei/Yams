@@ -1,15 +1,7 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-)
-
-var (
-	noOfPlayers int
-	name        string
-	reader      = bufio.NewReader(os.Stdin)
 )
 
 type Table struct {
@@ -30,9 +22,11 @@ type Table struct {
 	Yams   int
 }
 
-func GetPlayerNames() []string {
+//
+func GetPlayerNames() (int, []string) {
 
 	var players []string
+	var noOfPlayers int
 
 	fmt.Println("How many players are in the game?")
 	fmt.Println("Players:")
@@ -45,9 +39,10 @@ func GetPlayerNames() []string {
 	}
 
 	for i := 0; i < noOfPlayers; i++ {
+		fmt.Println("Please introduce the player names.")
 		player, _ := reader.ReadString('\n')
 		players = append(players, player)
 
 	}
-	return players
+	return noOfPlayers, players
 }

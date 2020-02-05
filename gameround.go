@@ -50,26 +50,41 @@ var (
 	dice5 int
 )
 
-func main() {
+func PlayerRound(playerName string, playerTableF, playerTableM Table) {
+	fmt.Println("Player " + playerName + "turn: ")
 	dice1 = rollDice()
 	dice2 = rollDice()
 	dice3 = rollDice()
 	dice4 = rollDice()
 	dice5 = rollDice()
-
 	displayDiceArt()
 
 	fmt.Println("Do you want to reroll?")
-	reroll1, err := reader.ReadString('\n')
+	reroll1, _ := reader.ReadString('\n')
 	if reroll1 == "Yes" || reroll1 == "YES" || reroll1 == "yes" {
 		rerollDice()
+
+		fmt.Println("Do you want to reroll?")
+		reroll2, _ := reader.ReadString('\n')
+		if reroll2 == "Yes" || reroll2 == "YES" || reroll2 == "yes" {
+			rerollDice()
+		}
 	}
-	fmt.Println("Do you want to reroll?")
-	reroll2, err := reader.ReadString('\n')
-	if reroll2 == "Yes" || reroll2 == "YES" || reroll2 == "yes" {
-		rerollDice()
+	fmt.Println("What is the final score of the roll?")
+	fmt.Scan(&answScore)
+	fmt.Println("In which table do you want to put the score?(M - for Mandatory Table; F - for Free Table)")
+	fmt.Scan(&answTable)
+	fmt.Println("In which category do you want to put the score?(Select a category from the table)")
+	fmt.Println("One - Two - Three - Four - Five - Six - OneP- TwoP - ThreeK - SmallF - BigF - FullH - FourK - Yams")
+	fmt.Scan(&answCategory)
+
+	if answTable == "M" {
+		playerTableM = AddScoreToTable(answCategory, answScore, playerTableM)
+	} else if answTable == "F" {
+		playerTableF = AddScoreToTable(answCategory, answScore, playerTableF)
 	}
 
+	fmt.Printf("%+v\n", playerTableF)
 }
 
 func rollDice() int {
@@ -136,7 +151,7 @@ func rerollDice() {
 
 }
 
-func AddScoreToTable(category string, score int, table Table) {
+func AddScoreToTable(category string, score int, table Table) Table {
 
 	switch category {
 	case "One":
@@ -183,4 +198,5 @@ func AddScoreToTable(category string, score int, table Table) {
 		fmt.Println("Added score ", score, " to category Yams")
 
 	}
+	return table
 }
